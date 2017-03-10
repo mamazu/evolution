@@ -4,12 +4,12 @@ aim = (20, 300)
 start = (250, 250)
 
 population = Population(1000)
-population.evaluate(aim)
+while population.generation < 500:
+	population.evaluate(aim)
+	population.kill(.2)
+	population.prints()
+	population.repopulate()
 print(population.get_avg_score())
-population.kill(.2)
-population.repopulate()
-print(population.get_avg_score())
-
 
 
 # Drawing the population
@@ -22,7 +22,7 @@ while frame_count < 5000:
 	for indi in population.pop:
 		genes = indi.genes
 		position = genes.get_movement()
-		rel = (start[0]+position[0], start[1]+position[1])
+		rel = (int(start[0]+position[0]), int(start[1]+position[1]))
 		pygame.draw.circle(screen, (255,0,0), rel, 2)
 	pygame.draw.circle(screen, (0,0,255), start , 3)
 	pygame.draw.circle(screen, (0,255,0), aim , 3)
