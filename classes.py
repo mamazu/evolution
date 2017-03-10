@@ -33,7 +33,7 @@ class Individuum:
 
 class Gene:
 	def __init__(self):
-		self.length = randrange(0, 10)
+		self.length = randrange(0, 200)
 		self.direction = Gene.random_pos()
 
 	def get_movement(self):
