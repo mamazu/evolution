@@ -16,6 +16,20 @@ class Population:
 class Individuum:
 	def __init__(self):
 		self.genes = Gene()
+		self.position = self.genes.get_movement()
+		self.score = None
+
+	def evaluate(self, aim):
+		if self.position == aim:
+			return 10000
+		distance = Individuum.distance(self.position, aim)
+		self.score = 10000 / distance
+
+	@staticmethod
+	def distance(pos1, pos2):
+		xdif = pos1[0]-pos2[0]
+		ydif = pos1[1]-pos2[1]
+		return (xdif **2 + ydif**2)**(.5)
 
 class Gene:
 	def __init__(self):
