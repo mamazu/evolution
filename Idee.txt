@@ -1,0 +1,19 @@
+Population = Menge an Individuuen
+
+Individuum = Eigenständige Lebensform
+
+Evolution = Entwicklung
+
+Generation = Zeitschritt
+
+Natürliche Selektion = Ausleseprozess
+
+Genetik = Material, dass das Verhalten definiert
+
+Evaluation = Beurteilen wie gut das Individuum angepasst ist
+
+# 3 Schritte Programm
+
+1. Erstellen einer Population
+2. "Warten" und evaluieren eine Generation
+3. Mit Natürlicher Selektion und Genetik erstellen neuer Population
