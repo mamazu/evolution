@@ -1,9 +1,12 @@
 from classes import *
 
+aim = (20, 300)
+start = (250, 250)
+
 population = Population(1000)
-print(len(population.pop))
+population.evolve(aim)
 
-
+print(population.get_avg_score())
 
 
 
@@ -17,8 +20,9 @@ while frame_count < 5000:
 	for indi in population.pop:
 		genes = indi.genes
 		position = genes.get_movement()
-		rel = (250+position[0], 250+position[1])
+		rel = (start[0]+position[0], start[1]+position[1])
 		pygame.draw.circle(screen, (255,0,0), rel, 2)
-	pygame.draw.circle(screen, (0,0,255), rel, 3)
+	pygame.draw.circle(screen, (0,0,255), start , 3)
+	pygame.draw.circle(screen, (0,255,0), aim , 3)
 	pygame.display.update()
 	frame_count += 1
