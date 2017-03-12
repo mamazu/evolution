@@ -72,20 +72,19 @@ class Individuum:
 		self.score = 0
 
 	def evaluate(self, aim):
-		if self.position == aim:
-			return 10000
-		distance = Individuum.distance(self.position, aim)
-		self.score = float(10000) / distance
+		# if self.genes.get_movement() != self.position:
+		# 	self.position = self.genes.get_movement()
+		diff = (self.position[0]-aim[0], self.position[1]-aim[1])
+		l = dist(diff)
+		if l == 0:
+			self.score = 10000
+			return
+		self.score = float(10000) / l
 
 	def mate(self, other):
 		child = Individuum()
 		child.genes = self.genes + other.genes
 		return child
-
-	@staticmethod
-	def distance(pos1, pos2):
-		diff = (pos1[0] - pos2[0], pos1[1] - pos2[1])
-		return length(diff)
 
 	def __repr__(self):
 		return "Id: %i, Score: %.3f, Genes: %s, Position: %s" % (self.id, self.score, self.genes, self.position)
