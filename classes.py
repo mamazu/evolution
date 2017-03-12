@@ -62,7 +62,11 @@ class Population:
 
 
 class Individuum:
+	ID = 0
+
 	def __init__(self):
+		self.id = Individuum.ID
+		Individuum.ID += 1
 		self.genes = Gene()
 		self.position = self.genes.get_movement()
 		self.score = 0
@@ -84,7 +88,7 @@ class Individuum:
 		return length(diff)
 
 	def __repr__(self):
-		return "%i with Genes: %s" % (self.score, self.genes)
+		return "Id: %i, Score: %.3f, Genes: %s, Position: %s" % (self.id, self.score, self.genes, self.position)
 
 
 class Gene:
