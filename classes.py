@@ -1,4 +1,4 @@
-from random import randrange
+from random import randrange, uniform
 
 
 def dist(vec):
@@ -16,6 +16,8 @@ def normalise(vec):
 
 
 class Population:
+	MUTATION_RATE = .01
+
 	def __init__(self, size=100):
 		self.generation = 0
 		self.size = int(size)
@@ -66,10 +68,13 @@ class Population:
 class Individuum:
 	ID = 0
 
-	def __init__(self):
+	def __init__(self, genes=None):
 		self.id = str(Individuum.ID).zfill(6)
 		Individuum.ID += 1
-		self.genes = Gene()
+		if genes is None:
+			self.genes = Gene()
+		else:
+			self.genes = genes
 		self.position = self.genes.get_movement()
 		self.score = 0
 
@@ -104,6 +109,8 @@ class Gene:
 		return (self.direction[0]*self.length, self.direction[1]*self.length)
 
 	def __add__(self, other):
+		if uniform(0, 1) <= Population.MUTATION_RATE:
+			return Gene()
 		length = float(self.length + other.length) / 2
 		direction = Gene.combine(self.direction, other.direction)
 		return Gene(length, direction)
