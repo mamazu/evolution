@@ -1,12 +1,12 @@
 from random import randrange
 
 
-def length(vec):
+def dist(vec):
 	return (vec[0]**2 + vec[1]**2) ** .5
 
 
 def normalise(vec):
-	l = length(vec)
+	l = dist(vec)
 	if l == 0:
 		return vec
 	vec = float(vec[0]) / l, float(vec[1]) / l
@@ -113,7 +113,7 @@ class Gene:
 	@staticmethod
 	def random_pos():
 		vec = (randrange(-5, 5), randrange(-5, 5))
-		l = length(vec)
+		l = dist(vec)
 		while l == 0:
 			vec = (randrange(-5, 5), randrange(-5, 5))
 			l = length(vec)
