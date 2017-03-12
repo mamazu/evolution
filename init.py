@@ -1,10 +1,10 @@
 from classes import *
 
-aim = (20, 300)
+aim = (20, 40)
 start = (250, 250)
 
 population = Population(1000)
-while population.generation < 500:
+while population.generation < 800:
 	population.evaluate(aim)
 	population.kill(.2)
 	population.prints()
@@ -24,7 +24,9 @@ while frame_count < 5000:
 		position = genes.get_movement()
 		rel = (int(start[0]+position[0]), int(start[1]+position[1]))
 		pygame.draw.circle(screen, (255,0,0), rel, 2)
+	#Drawing start and end
 	pygame.draw.circle(screen, (0,0,255), start , 3)
-	pygame.draw.circle(screen, (0,255,0), aim , 3)
+	rel_aim= (int(start[0]+aim[0]), int(start[1]+aim[1]))
+	pygame.draw.circle(screen, (0,255,0), rel_aim , 3)
 	pygame.display.update()
 	frame_count += 1

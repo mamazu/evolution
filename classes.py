@@ -1,5 +1,15 @@
 from random import randrange
 
+def length(vec):
+	return (vec[0]**2 + vec[1]**2) ** .5
+
+def normalise(vec):
+	l = length(vec)
+	if l == 0:
+		return vec
+	vec = float(vec[0]) / l, float(vec[1]) / l
+	return vec
+
 class Population:
 	def __init__(self, size=100):
 		self.generation = 0
@@ -66,9 +76,8 @@ class Individuum:
 
 	@staticmethod
 	def distance(pos1, pos2):
-		xdif = pos1[0] - pos2[0]
-		ydif = pos1[1] - pos2[1]
-		return (xdif **2 + ydif**2)**(.5)
+		diff =(pos1[0] - pos2[0], pos1[1] - pos2[1])
+		return length(diff)
 
 	def __repr__(self):
 		return "%i with Genes: %s" % (self.score, self.genes)
@@ -91,11 +100,17 @@ class Gene:
 	def combine(dir1, dir2):
 		x = float(dir1[0] + dir2[0]) / 2
 		y = float(dir1[1] + dir2[1]) / 2
-		return (x, y)
+		return normalise((x, y))
 
 	def __repr__(self):
-		return "L:%f (%i|%i)" % (self.length, self.direction[0], self.direction[1])
+		return "L:%f (%f|%f)" % (self.length, self.direction[0], self.direction[1])
 
 	@staticmethod
 	def random_pos():
-		return (randrange(-5, 5), randrange(-5, 5))
+		vec = (randrange(-5, 5), randrange(-5, 5))
+		l = length(vec)
+		while l == 0:
+			vec = (randrange(-5, 5), randrange(-5, 5))
+			l = length(vec)
+		normalise(vec)
+		return vec
