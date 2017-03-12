@@ -22,12 +22,24 @@ class Population:
 		for i in range(4):
 			print(self.pop[-(i+1)])
 
+	def select(self):
+		l = (len(self.pop)**2+len(self.pop))/2
+		winner = randrange(l) + 1
+
+		for i, indi in enumerate(self.pop):
+			balls = self.size - i
+			if winner <= balls:
+				return self.pop[-(i+1)]
+			winner -= balls
+
 	def repopulate(self):
 		from random import choice
 		to_get = self.size - len(self.pop)
 		for _ in range(to_get):
-			m1 = choice(self.pop)
-			m2 = choice(self.pop)
+			m1 = self.select()
+			m2 = self.select()
+			# m1 = choice(self.pop)
+			# m2 = choice(self.pop)
 			child = m1.mate(m2)
 			self.pop.append(child)
 		self.generation += 1
