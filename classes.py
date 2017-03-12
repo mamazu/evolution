@@ -91,24 +91,27 @@ class Individuum:
 
 
 class Gene:
-	def __init__(self):
-		self.length = randrange(0, 200)
-		self.direction = Gene.random_pos()
+	def __init__(self, length=None, direction=None):
+		if length is None and direction is None:
+			self.length = randrange(0, 200)
+			self.direction = normalise(Gene.random_pos())
+		else:
+			self.length = length
+			self.direction = normalise(direction)
 
 	def get_movement(self):
 		return (self.direction[0]*self.length, self.direction[1]*self.length)
 
 	def __add__(self, other):
-		new_genes = Gene()
-		new_genes.length = float(self.length + other.length) / 2
-		new_genes.direction = Gene.combine(self.direction, other.direction)
-		return new_genes
+		length = float(self.length + other.length) / 2
+		direction = Gene.combine(self.direction, other.direction)
+		return Gene(length, direction)
 
 	@staticmethod
 	def combine(dir1, dir2):
 		x = float(dir1[0] + dir2[0]) / 2
 		y = float(dir1[1] + dir2[1]) / 2
-		return normalise((x, y))
+		return (x, y)
 
 	def __repr__(self):
 		return "L:%f (%f|%f)" % (self.length, self.direction[0], self.direction[1])
@@ -119,6 +122,5 @@ class Gene:
 		l = dist(vec)
 		while l == 0:
 			vec = (randrange(-5, 5), randrange(-5, 5))
-			l = length(vec)
-		normalise(vec)
+			l = dist(vec)
 		return vec
