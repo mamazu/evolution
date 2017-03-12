@@ -4,10 +4,10 @@ aim = (20, 40)
 start = (250, 250)
 
 population = Population(1000)
-while population.generation < 800:
+while population.generation < 10:
 	population.evaluate(aim)
 	population.kill(.2)
-	population.prints()
+	# population.prints()
 	population.repopulate()
 print(population.get_avg_score())
 
