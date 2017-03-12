@@ -87,10 +87,7 @@ class Individuum:
 		self.score = float(10000) / l
 
 	def mate(self, other):
-		child = Individuum()
-		child.genes = self.genes + other.genes
-		child.position = child.genes.get_movement()
-		return child
+		return Individuum(self.genes + other.genes)
 
 	def __repr__(self):
 		return "Id: %s, Score: %.3f, Genes: [%s], Position: %s" % (self.id, self.score, self.genes, pretty(self.position))
