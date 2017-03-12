@@ -1,7 +1,9 @@
 from random import randrange
 
+
 def length(vec):
 	return (vec[0]**2 + vec[1]**2) ** .5
+
 
 def normalise(vec):
 	l = length(vec)
@@ -9,6 +11,7 @@ def normalise(vec):
 		return vec
 	vec = float(vec[0]) / l, float(vec[1]) / l
 	return vec
+
 
 class Population:
 	def __init__(self, size=100):
@@ -57,6 +60,7 @@ class Population:
 	def get_avg_score(self):
 		return sum([indi.score for indi in self.pop]) / self.size
 
+
 class Individuum:
 	def __init__(self):
 		self.genes = Gene()
@@ -76,11 +80,12 @@ class Individuum:
 
 	@staticmethod
 	def distance(pos1, pos2):
-		diff =(pos1[0] - pos2[0], pos1[1] - pos2[1])
+		diff = (pos1[0] - pos2[0], pos1[1] - pos2[1])
 		return length(diff)
 
 	def __repr__(self):
 		return "%i with Genes: %s" % (self.score, self.genes)
+
 
 class Gene:
 	def __init__(self):
@@ -88,7 +93,7 @@ class Gene:
 		self.direction = Gene.random_pos()
 
 	def get_movement(self):
-		return (self.direction[0]*self.length,self.direction[1]*self.length)
+		return (self.direction[0]*self.length, self.direction[1]*self.length)
 
 	def __add__(self, other):
 		new_genes = Gene()
