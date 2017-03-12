@@ -4,6 +4,8 @@ from random import randrange
 def dist(vec):
 	return (vec[0]**2 + vec[1]**2) ** .5
 
+def pretty(vec):
+	return "(%.3f|%.3f)" % (vec[0], vec[1])
 
 def normalise(vec):
 	l = dist(vec)
@@ -65,7 +67,7 @@ class Individuum:
 	ID = 0
 
 	def __init__(self):
-		self.id = Individuum.ID
+		self.id = str(Individuum.ID).zfill(6)
 		Individuum.ID += 1
 		self.genes = Gene()
 		self.position = self.genes.get_movement()
@@ -87,7 +89,7 @@ class Individuum:
 		return child
 
 	def __repr__(self):
-		return "Id: %i, Score: %.3f, Genes: %s, Position: %s" % (self.id, self.score, self.genes, self.position)
+		return "Id: %s, Score: %.3f, Genes: [%s], Position: %s" % (self.id, self.score, self.genes, pretty(self.position))
 
 
 class Gene:
@@ -114,7 +116,7 @@ class Gene:
 		return (x, y)
 
 	def __repr__(self):
-		return "L:%f (%f|%f)" % (self.length, self.direction[0], self.direction[1])
+		return "Length: %.3f Direction: %s" % (self.length, pretty(self.direction))
 
 	@staticmethod
 	def random_pos():
