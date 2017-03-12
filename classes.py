@@ -74,8 +74,6 @@ class Individuum:
 		self.score = 0
 
 	def evaluate(self, aim):
-		# if self.genes.get_movement() != self.position:
-		# 	self.position = self.genes.get_movement()
 		diff = (self.position[0]-aim[0], self.position[1]-aim[1])
 		l = dist(diff)
 		if l == 0:
@@ -86,6 +84,7 @@ class Individuum:
 	def mate(self, other):
 		child = Individuum()
 		child.genes = self.genes + other.genes
+		child.position = child.genes.get_movement()
 		return child
 
 	def __repr__(self):
